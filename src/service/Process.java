@@ -25,12 +25,13 @@ public class Process {
     }
 
     public void decoder() {
-        List<String> stringList = fileManager.readFile(inputFileName);
-        for (String stringText : stringList) {
-            String decipherText = cipher.decrypt(stringText, key);
-            fileManager.writeFile(decipherText, outputFileName);
+        if (validator.isFileExists(inputFileName) && validator.isValidKey(key)) {
+            List<String> stringList = fileManager.readFile(inputFileName);
+            for (String stringText : stringList) {
+                String decipherText = cipher.decrypt(stringText, key);
+                fileManager.writeFile(decipherText, outputFileName);
+            }
         }
-        //System.out.println("файл расшифрован" + "\n");
     }
 
     public void bruteForce() {
